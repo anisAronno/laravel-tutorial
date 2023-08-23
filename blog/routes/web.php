@@ -7,10 +7,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->controller(UserController::class)->middleware('test')->name('user.')->group(function () {
-    Route::get('user', 'index')->name('all');
-    Route::get('/user/{user}', 'show')->where('id', '[0-9]+')->name('show');
+Route::prefix('admin')->controller(UserController::class)->name('user.')->group(function () {
+    Route::get('/user', 'index')->name('all');
+    Route::get('/user/create', [UserController::class, 'create'])->name('create');
     Route::post('/user', 'store')->name('store');
+    Route::get('/user/{user}', 'show')->where('id', '[0-9]+')->name('show');
 });
 
 Route::get('/', [HomeController::class, 'index']);

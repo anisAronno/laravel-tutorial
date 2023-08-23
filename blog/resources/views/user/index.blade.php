@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <h1>Thia ia user page</h1>
+@extends('layouts.app')
 
+@section('title', 'Page Title')
+
+@section('content')
+
+<section class="p-20">
     @foreach ($users as $key=>$user)
-        <p>{{$key+1}} &nbsp;{{$user->name}}</p>
+    <div class="flex m-5">
+        <div>
+            <p>{{$key+1}} &nbsp;</p>
+        </div>
+       <div>
+        <p>Name: {{$user->name}}</p>
+        <p>Email:{{$user->email}}</p>
+        <p>Password: {{$user->password}}</p>
+       </div>
+    </div>
     @endforeach
- </body>
-</html>
+</section>
+
+@endsection
