@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,8 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->data['users'] = User::all();
-        return view('user.index', $this->data);
+        $this->data['users'] = User::orderByDesc('id')->paginate(10);
+        return view('dashboard.user.index', $this->data);
     }
 
     /**
@@ -22,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('dashboard.user.create');
     }
 
     /**
@@ -35,7 +36,7 @@ class UserController extends Controller
         $response =  User::create($userData);
 
         if($response->id) {
-            return redirect()->route('user.all');
+            return redirect()->route('admin.user.index');
         } else {
             return redirect()->back();
         }
@@ -46,7 +47,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('user.show', ['user' => $user]);
+        return view('dashboard.user.show', ['user' => $user]);
     }
 
     /**

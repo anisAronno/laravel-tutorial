@@ -1,10 +1,10 @@
-@extends('layouts.app')
+@extends('dashboard.layouts.app')
 
 @section('title', 'Page Title')
 
 @section('content')
-<section class=" p-10">
-    <form class="md:w-[600px] mx-auto mt-10" method="POST" action="{{ route('user.store') }}">
+<section class="p-2">
+    <form class=" mx-auto mt-10" method="POST" action="{{ route('admin.user.store') }}">
         @csrf
         <div class="space-y-12">
             @if ($errors->any())
@@ -18,9 +18,8 @@
             @endif
          
           <div class="border-b border-gray-900/10 pb-12">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
-      
+            <h2 class="text-base font-semibold leading-7 text-gray-900">User Create</h2>
+       
             <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div class="col-span-6">
                 <label for="name" class="block text-sm font-medium leading-6 text-gray-900"> name</label>
@@ -54,7 +53,7 @@
         </div>
       
         <div class="mt-6 flex items-center justify-end gap-x-6"> 
-          <button type="submit" class="rounded-md bg-indigo-600 px-20 py-5 text-2xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
+          <button type="submit" class="rounded-md bg-indigo-600 px-10 py-3 text-2xl font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
         </div>
       </form>
 </section>
