@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -14,7 +14,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->data['users'] = User::orderByDesc('id')->paginate(10);
+        $this->data['users'] = User::select('id', 'name', 'email', 'role')->where([
+             ['role', 'user'],
+            ['status', 'Pending']
+            ])->orderByDesc('id')->paginate(10);
         return view('dashboard.user.index', $this->data);
     }
 
@@ -53,24 +56,32 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        return view('dashboard.user.edit', compact('user'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        if($user->update($request->only(['name', 'email', 'role']))) {
+            return redirect()->to(route('admin.user.index'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        if($user->delete()) {
+            return redirect()->to(route('admin.user.index'));
+        } else {
+            return redirect()->back();
+        }
     }
 }

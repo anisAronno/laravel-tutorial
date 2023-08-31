@@ -8,7 +8,7 @@
     <div class="sm:flex sm:items-center">
       <div class="sm:flex-auto">
         <h1 class="text-base font-semibold leading-6 text-gray-900">Users</h1>
-        <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, title, email and role.</p>
+        <p class="mt-2 text-sm text-gray-700">A list of all the users in your account including their name, email and role.</p>
       </div>
       <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
         <a href="{{ route( 'admin.user.create' )}}" type="button" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add user</a>
@@ -65,19 +65,25 @@
             </thead>
             <tbody class="divide-y divide-gray-200 bg-white">
             @foreach ($users as $key=>$user)
-
               <tr>
-                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ $user->name }}</td>
+                 <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ $user->name }}</td>
                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->email }}</td>
-                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">Admin</td>
+                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$user->role}}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 flex gap-5 items-center text-sm sm:pr-0">
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                  <a href="#" class="text-red-600 hover:text-indigo-900">Delete</a>
+
+                  <a href="{{route('admin.user.edit', $user->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+
+                    <form  method="post" action="{{route('admin.user.delete', $user->id)}}">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="text-red-600 hover:text-indigo-900">Delete</button>
+                    </form>
                 </td>
               </tr>
 
               @endforeach
             </tbody>
+            
             <tfoot>
                 <tr>
                     <td colspan="5" class="p-5">

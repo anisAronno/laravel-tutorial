@@ -9,10 +9,6 @@
     @yield('css')
 </head>
 <body>
-
-
-
-
  
 <div>
     @include('dashboard.layouts.sidebar')
@@ -29,34 +25,28 @@
       </main>
     </div>
   </div>
-  
 
 
+  <script>
+        let container = document.getElementById('userProfileContainer');
 
+        function toggleSidebar() {
+            let sidebarContainer = document.getElementById('mobile-sidebar');
+            sidebarContainer.style.display = sidebarContainer.style.display === 'none' ? 'block' : 'none';
+        }
+        function toggleProfile() {
+            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        }
 
+        document.addEventListener('click', function(event) {
+            let button = document.getElementById('user-menu-button');
+             if (! container.contains(event.target) && event.target !== button && event.target.contains(button)) {
+                container.style.display = 'none'; 
+                console.log('hi');
+            }
+        });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   </script>
     @yield('script')
 </body>
 </html>

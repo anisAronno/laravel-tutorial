@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StoreAboutRequest;
-use App\Http\Requests\UpdateAboutRequest;
-use App\Models\About;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class AboutController extends Controller
+class SettingsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('about.index');
+        return view('dashboard.settings.index');
+
     }
 
     /**
@@ -27,7 +27,7 @@ class AboutController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAboutRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +35,7 @@ class AboutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(About $about)
+    public function show(string $id)
     {
         //
     }
@@ -43,7 +43,7 @@ class AboutController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(About $about)
+    public function edit(string $id)
     {
         //
     }
@@ -51,7 +51,7 @@ class AboutController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAboutRequest $request, About $about)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -59,7 +59,7 @@ class AboutController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(About $about)
+    public function destroy(string $id)
     {
         //
     }

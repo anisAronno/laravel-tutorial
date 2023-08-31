@@ -1,19 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
-use App\Models\Post;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAboutRequest;
+use App\Http\Requests\UpdateAboutRequest;
+use App\Models\About;
 
-class PostController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('post.index');
+        return view('dashboard.about.index');
     }
 
     /**
@@ -27,7 +28,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePostRequest $request)
+    public function store(StoreAboutRequest $request)
     {
         //
     }
@@ -35,7 +36,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(About $about)
     {
         //
     }
@@ -43,7 +44,7 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Post $post)
+    public function edit(About $about)
     {
         //
     }
@@ -51,7 +52,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdateAboutRequest $request, About $about)
     {
         //
     }
@@ -59,7 +60,7 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(About $about)
     {
         //
     }
