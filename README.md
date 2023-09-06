@@ -67,4 +67,5 @@ php artisan serve
 
 You can now access the server at http://localhost:8000
 
+
 Follow [Laravel Documentation](https://laravel.com/docs/10.x/installation) For More information
