@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
@@ -14,6 +16,7 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::orderByDesc('id')->paginate(10);
+
         return view('dashboard.blog.index', ['blogs' => $blogs]);
     }
 
@@ -30,7 +33,19 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        $response =  Blog::create($request->only('title', 'description'));
+        $data = $request->only('title', 'description');
+
+        if($request->hasFile('image')) {
+            $file =  $request->file('image');
+            $extension =  $file->extension();
+            $name =  $file->getClientOriginalName();
+            $path =  Str::slug($name).'_'.time().'.'.$extension;
+
+            Storage::disk('public')->put($path, file_get_contents($file));
+            $data['image'] = $path;
+        }
+
+        $response =  Blog::create($data);
 
         if($response) {
             return redirect()->route('admin.blog.index');
@@ -74,7 +89,11 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        $pathInfo = pathinfo($blog->image);
+        $filename = $pathInfo['basename'];
+        
         if($blog->delete()) {
+            Storage::disk('public')->delete($filename);
             return redirect()->to(route('admin.blog.index'));
         } else {
             return redirect()->back();
