@@ -7,11 +7,12 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->controller(UserController::class)->name('admin.')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard'); 
+Route::prefix('admin')->controller(UserController::class)->middleware('auth')->name('admin.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     //user route
     Route::get('/user', 'index')->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
@@ -34,6 +35,14 @@ Route::prefix('admin')->controller(UserController::class)->name('admin.')->group
     Route::get('/report', [ReportController::class, 'index'])->name('report.index');
 
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('me', [AuthController::class, 'me'])->name('me');
+    Route::get('/password/reset', [AuthController::class, 'passwordReset'])->name('password.reset');
+    Route::post('/password/reset', [AuthController::class, 'passwordResetProcess'])->name('password.reset.process');
 });
 
 Route::get('/', [HomeController::class, 'index']);
+
+Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::post('login', [AuthController::class, 'loginProcess'])->name('loginProcess');

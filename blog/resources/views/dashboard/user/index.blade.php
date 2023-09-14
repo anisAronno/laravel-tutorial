@@ -71,13 +71,20 @@
                 <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{$user->role}}</td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 flex gap-5 items-center text-sm sm:pr-0">
 
-                  <a href="{{route('admin.user.edit', $user->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    @can('isAdmin')
+                    <a href="{{route('admin.user.edit', $user->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                    @endcan
+                    
+                    @can('isAdmin')
 
                     <form  method="post" action="{{route('admin.user.delete', $user->id)}}">
                         @method('DELETE')
                         @csrf
                         <button type="submit" class="text-red-600 hover:text-indigo-900">Delete</button>
                     </form>
+
+                    @endcan
+
                 </td>
               </tr>
 

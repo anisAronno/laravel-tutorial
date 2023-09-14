@@ -74,6 +74,7 @@
                     <img src="{{$blog->image}}" alt="{{$blog->title}}" class="w-48 h-auto" >
                 </td>
                 <td class="relative whitespace-nowrap py-4 pl-3 pr-4 flex gap-5 items-center text-sm sm:pr-0">
+                    @can('isAdmin')
 
                   <a href="{{route('admin.blog.edit', $blog->id)}}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
 
@@ -82,8 +83,10 @@
                         @csrf
                         <button type="submit" class="text-red-600 hover:text-indigo-900">Delete</button>
                     </form>
+                    @endcan
                 </td>
               </tr>
+ 
 
               @endforeach
             </tbody>
