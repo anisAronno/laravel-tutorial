@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,6 +21,7 @@ class BlogFactory extends Factory
             'title' => fake()->sentence(),
             'description' => fake()->paragraph(20),
             'image' => fake()->imageUrl(),
+            'user_id' => User::all(['id'])->random(),
         ];
     }
 }
