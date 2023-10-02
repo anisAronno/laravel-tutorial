@@ -1,20 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $users = User::with('addresses')->get();
-        return view('dashboard.index', compact('users'));
+        //
     }
 
     /**
@@ -22,7 +20,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -30,19 +28,15 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        $user = auth()->user();
-        $user->addresses->create([
-            'user_id' => $user->id,
-            'thana' => $request->thana,
-        ]);
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Blog $blog)
     {
-        //
+        return view('blog.show', compact('blog'));
     }
 
     /**

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\BlogController as BlogCon;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ReportController;
@@ -42,7 +43,13 @@ Route::prefix('admin')->controller(UserController::class)->middleware('auth')->n
     Route::post('/password/reset', [AuthController::class, 'passwordResetProcess'])->name('password.reset.process');
 });
 
-Route::get('/', [HomeController::class, 'index']);
-
+//Auth Route
 Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
 Route::post('login', [AuthController::class, 'loginProcess'])->name('loginProcess');
+
+//frontend route
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/about', [HomeController::class, 'index'])->name('about');
+Route::get('/blog', [HomeController::class, 'index'])->name('blog');
+Route::get('/blog/{blog}', [BlogCon::class, 'show'])->name('blog.show');
+Route::get('/contact', [HomeController::class, 'index'])->name('contact');

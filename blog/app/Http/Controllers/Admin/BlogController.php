@@ -34,6 +34,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $data = $request->only('title', 'description');
+        $data['user_id'] = auth()->id();
 
         if($request->hasFile('image')) {
             $file =  $request->file('image');
@@ -91,7 +92,7 @@ class BlogController extends Controller
     {
         $pathInfo = pathinfo($blog->image);
         $filename = $pathInfo['basename'];
-        
+
         if($blog->delete()) {
             Storage::disk('public')->delete($filename);
             return redirect()->to(route('admin.blog.index'));

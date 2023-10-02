@@ -3,7 +3,7 @@
 @section('title', 'Page Title')
 
 @section('content')
-<section class=" h-full grid justify-center"> 
+<section class=" h-full grid justify-center mb-5"> 
     <form class="w-[400px] mt-20" method="POST" action="{{ route('login') }}">
         @csrf
         <div class="space-y-12">

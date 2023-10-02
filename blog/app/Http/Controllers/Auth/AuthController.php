@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\PasswordForgetRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,7 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function loginProcess(Request $request)
+    public function loginProcess(LoginRequest $request)
     {
         $response =  Auth::attempt($request->only('email', 'password'));
         if($response) {
@@ -37,7 +39,7 @@ class AuthController extends Controller
         return view('auth.passwordReset');
     }
 
-    public function passwordResetProcess(Request $request)
+    public function passwordResetProcess(PasswordForgetRequest $request)
     {
         $user = auth()->user();
 
