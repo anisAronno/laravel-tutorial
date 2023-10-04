@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreContactRequest extends FormRequest
+class StoreContactControllerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class StoreContactRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => 'required|string',
-            "email" => 'required|string|email',
-            "phone" => 'required|string',
-            "subject" => 'required|string',
-            "message" => 'required|string',
+            //
         ];
     }
 }

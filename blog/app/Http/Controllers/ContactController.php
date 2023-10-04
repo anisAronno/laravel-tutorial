@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
+use App\Http\Requests\StoreContactRequest;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class ContactController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $blogs = Blog::with('user')->orderByDesc('id')->simplePaginate(10);
-        return view('home', compact('blogs'));
+        return view('contact.index');
     }
 
     /**
@@ -27,17 +27,23 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreContactRequest $request)
     {
-        //
+        $contact = Contact::create($request->all());
+
+        if ($contact) {
+            return redirect()->back()->with(['message'=>'Message send successfully']);
+        }else{
+            return back()->with(['message'=>'Something Went Wrong']);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(string $id)
     {
-        return view('blog.show', compact('blog'));
+        //
     }
 
     /**

@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
 use Illuminate\Http\Request;
 
-class BlogController extends Controller
+class AboutController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $blogs = Blog::with('user')->orderByDesc('id')->simplePaginate(10);
-        return view('home', compact('blogs'));
+        return view('about.index');
     }
 
     /**
@@ -35,9 +33,9 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(string $id)
     {
-        return view('blog.show', compact('blog'));
+        //
     }
 
     /**

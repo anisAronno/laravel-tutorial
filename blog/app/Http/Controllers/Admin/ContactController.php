@@ -14,7 +14,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('dashboard.contact.index');
+        $contacts = Contact::orderByDesc('id')->paginate(10);
+        return view('dashboard.contact.index', compact('contacts'));
     }
 
     /**
@@ -62,6 +63,10 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        if($contact->delete()) {
+            return redirect()->to(route('admin.contact.index'));
+        } else {
+            return redirect()->back();
+        }
     }
 }

@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $blogs = Blog::orderByDesc('id')->simplePaginate(10);
+        $blogs = Blog::with('user')->orderByDesc('id')->simplePaginate(10);
         return view('home', compact('blogs'));
     }
 

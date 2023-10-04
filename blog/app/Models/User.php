@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -47,6 +48,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getImageAttribute($value)
+    {
+        $storage = Storage::disk('public');
+
+        if(!empty($value) && $storage->exists($value)) {
+            return Storage::disk('public')->url($value);
+        }
+
+        return $value;
+    }
 
     public function addresses(): HasMany
     {

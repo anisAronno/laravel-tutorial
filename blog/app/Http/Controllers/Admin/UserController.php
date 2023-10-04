@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -83,5 +86,39 @@ class UserController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    /**
+     * User Avatar Change
+     *
+     * @param User $user
+     * @return void
+     */
+    public function avatarChange(Request $request, User $user)
+    {
+
+        $pathInfo = pathinfo($user->image);
+        $filename = $pathInfo['basename'];
+        
+        if($request->hasFile('image')) {
+            $file =  $request->file('image');
+            $extension =  $file->extension();
+            $name =  $file->getClientOriginalName();
+            $path =  Str::slug($name).'_'.time().'.'.$extension;
+
+            Storage::disk('public')->put($path, file_get_contents($file));
+
+            $user->image = $path;
+
+            if($user->save()) {
+                Storage::disk('public')->delete($filename);
+                return response()->json(['error' => false, 'message' => 'Save successfully']);
+            } else {
+                return response()->json(['error' => true, 'message' => 'Something went wrong!']);
+            }
+        }
+
+        return response()->json(['error' => true, 'message' => 'Image not found!']);
+
     }
 }

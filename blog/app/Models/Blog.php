@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\UniqueSlug;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,15 @@ class Blog extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    protected static function boot()
+    {
+        static::creating(function ($model) {
+            $model->slug = UniqueSlug::generate($model, 'slug', $model->title);
+        });
+
+        parent::boot();
+    }
 
     public function getImageAttribute($value)
     {
@@ -24,14 +34,10 @@ class Blog extends Model
         return $value;
     }
 
-    public function getExcerptAttribute()
-    {
-        return Str::limit($this->description, Post::EXCERPT_LENGTH);
-    }
-
     public function getNextAttribute()
     {
-        return static::select('id', 'title')->where('id', '>', $this->id)->orderBy('id', 'asc')->first();
+
+        return static::select('id', 'title', 'slug')->where('id', '>', $this->id)->orderBy('id', 'asc')->first();
     }
 
     /**
@@ -41,7 +47,7 @@ class Blog extends Model
      */
     public function getPreviousAttribute()
     {
-        return static::select('id', 'title')->where('id', '<', $this->id)->orderBy('id', 'desc')->first();
+        return static::select('id', 'title', 'slug')->where('id', '<', $this->id)->orderBy('id', 'desc')->first();
     }
 
     public function user(): BelongsTo

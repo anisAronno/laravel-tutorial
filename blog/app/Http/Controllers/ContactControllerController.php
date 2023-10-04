@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreContactControllerRequest;
+use App\Http\Requests\UpdateContactControllerRequest;
+use App\Models\ContactController;
 
-class BlogController extends Controller
+class ContactControllerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $blogs = Blog::with('user')->orderByDesc('id')->simplePaginate(10);
-        return view('home', compact('blogs'));
+        //
     }
 
     /**
@@ -27,7 +27,7 @@ class BlogController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreContactControllerRequest $request)
     {
         //
     }
@@ -35,15 +35,15 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show(ContactController $contactController)
     {
-        return view('blog.show', compact('blog'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ContactController $contactController)
     {
         //
     }
@@ -51,7 +51,7 @@ class BlogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateContactControllerRequest $request, ContactController $contactController)
     {
         //
     }
@@ -59,7 +59,7 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ContactController $contactController)
     {
         //
     }
