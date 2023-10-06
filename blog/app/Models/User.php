@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use AnisAronno\MediaHelper\Models\Image;
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -68,5 +69,10 @@ class User extends Authenticatable
     public function blogs(): HasMany
     {
         return $this->hasMany(Blog::class, 'user_id', 'id');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(Image::class, 'user_id', 'id');
     }
 }

@@ -4,8 +4,71 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0a77f1ec38e951f5349aa532ef3f3ac",
+    "content-hash": "5b8b512617b1e08c77989225d6094c07",
     "packages": [
+        {
+            "name": "anisaronno/laravel-media-helper",
+            "version": "0.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/anisAronno/Laravel-Media-Helper.git",
+                "reference": "2e54c0616d9e03b0b1c59cb39792c93a173e0493"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/anisAronno/Laravel-Media-Helper/zipball/2e54c0616d9e03b0b1c59cb39792c93a173e0493",
+                "reference": "2e54c0616d9e03b0b1c59cb39792c93a173e0493",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^8.12|^9.0|^10.0",
+                "laravel/framework": "^8.37|^9.0|^10.0",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.9",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "AnisAronno\\MediaHelper\\MediaHelperServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "AnisAronno\\MediaHelper\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "MD. Anichur Rahaman",
+                    "email": "contact@anichur.com",
+                    "homepage": "https://anichur.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel Media Helper",
+            "homepage": "https://github.com/anisAronno/laravel-media-helper",
+            "keywords": [
+                "file",
+                "gallery",
+                "laravel",
+                "media",
+                "wedevs"
+            ],
+            "support": {
+                "issues": "https://github.com/anisAronno/Laravel-Media-Helper/issues",
+                "source": "https://github.com/anisAronno/Laravel-Media-Helper/tree/v0.2.1"
+            },
+            "time": "2023-09-07T13:10:50+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
