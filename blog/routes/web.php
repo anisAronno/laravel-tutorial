@@ -22,6 +22,7 @@ Route::prefix('admin')->controller(UserController::class)->middleware('auth')->n
     Route::post('/user', 'store')->name('user.store');
     Route::get('/user/{user}', 'show')->where('id', '[0-9]+')->name('user.show');
     Route::delete('/user/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
+    
     Route::post('/user/image/{user}', [UserController::class, 'avatarChange'])->name('user.avatar.change');
 
     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');

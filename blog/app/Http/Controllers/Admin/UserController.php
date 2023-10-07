@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -17,10 +18,20 @@ class UserController extends Controller
      */
     public function index()
     {
-        $this->data['users'] = User::select('id', 'name', 'email', 'role')->where([
-             ['role', 'user'],
-            ['status', 'Pending']
-            ])->orderByDesc('id')->paginate(10);
+
+        // $users = DB::table('users')->select('id','name', 'email')->find(2);
+        // $users = DB::table('users')->count();
+        // $users = User::findOrFail(20);
+
+        // $users = DB::table('users')
+        //     ->join('blogs', 'users.id', '=', 'blogs.user_id')
+        //     ->select('users.*', 'blogs.title', 'blogs.description')
+        //     ->get();
+
+        // dd($users);
+
+
+        $this->data['users'] = User::select('id', 'name', 'email', 'role')->orderByDesc('id')->paginate(10);
         return view('dashboard.user.index', $this->data);
     }
 
@@ -99,7 +110,7 @@ class UserController extends Controller
 
         $pathInfo = pathinfo($user->image);
         $filename = $pathInfo['basename'];
-        
+
         if($request->hasFile('image')) {
             $file =  $request->file('image');
             $extension =  $file->extension();

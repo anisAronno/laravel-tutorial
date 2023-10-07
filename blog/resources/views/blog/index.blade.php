@@ -4,7 +4,7 @@
 
 @section('content')
 
-@include('layouts.header', ['title' => 'Home Page', 'subTitle' => 'Lorem Ipsum Dolor Sit Amet'])
+@include('layouts.header', ['title' => 'Blog Page', 'subTitle' => 'Lorem Ipsum Dolor Sit Amet'])
 
 <div class="container mx-auto flex flex-wrap py-6">
     <!-- Posts Section -->

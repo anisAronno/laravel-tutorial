@@ -19,7 +19,6 @@
                     name="image"
                     class="mt-1 form-controll cursor-pointer hidden"
                     onchange="saveImageWithPreview(this);"  
-
                 />
             </div>
         </div>
@@ -63,7 +62,7 @@
 
 </div>
 
-<div class="mt-5">
+<div class="m-5">
 
     <h2 class="text-center py-5  text-lg md:text-2xl underline underline-offset-8">Address</h2>
        

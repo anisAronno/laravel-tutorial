@@ -24,6 +24,15 @@
                 <i class="fab fa-linkedin"></i>
             </a>
         </div>
+        <div>
+            @guest 
+                <a class="text-xl text-white" href="{{route('login')}}">Login</a>
+            @endguest
+
+            @auth
+            <a class="text-xl text-white" href="{{route('admin.dashboard')}}">Dashboard</a>
+            @endauth
+        </div>
     </div>
 
 </nav>

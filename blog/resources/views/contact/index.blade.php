@@ -4,6 +4,8 @@
 
 @section('content') 
 
+@include('layouts.header', ['title' => 'Contact Page', 'subTitle' => 'Lorem Ipsum Dolor Sit Amet'])
+
 <div class="w-full grid grid-cols-2 gap-10 flex-wrap p-10">
     <div class="col-span-1">
         <h1 class=" text-4xl underline underline-offset-8 pb-5">Contact us</h1>

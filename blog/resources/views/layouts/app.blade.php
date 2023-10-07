@@ -23,8 +23,6 @@
 <body class="bg-white font-family-karla">
 
     @include('layouts.menu')
-    @include('layouts.header')
-
 
     @yield('content')  
 

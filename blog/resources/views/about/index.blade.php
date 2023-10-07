@@ -3,6 +3,7 @@
 @section('title', 'Page Title')
 
 @section('content') 
+@include('layouts.header', ['title' => 'About Page', 'subTitle' => 'Lorem Ipsum Dolor Sit Amet'])
 
 <div class="w-full grid grid-cols-2 gap-10 flex-wrap p-10">
     <div class="col-span-1">
