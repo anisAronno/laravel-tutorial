@@ -34,7 +34,7 @@
                 <a href="#" class="uppercase px-3">Terms & Conditions</a>
                 <a href="#" class="uppercase px-3">Contact Us</a>
             </div>
-            <div class="uppercase pb-6">&copy; myblog.com</div>
+            <div class="uppercase pb-6">{{getSettings('copyright')}}</div>
         </div>
     </footer>
 

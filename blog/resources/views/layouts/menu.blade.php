@@ -11,16 +11,16 @@
         </nav>
 
         <div class="flex items-center text-lg no-underline text-white pr-6">
-            <a class="" href="https://facebook.com/anisAronno">
+            <a class="" href="{{getSettings('facebook_url')}}">
                 <i class="fab fa-facebook"></i>
             </a>
-            <a class="pl-6" href="#">
+            <a class="pl-6" href="{{getSettings('instagram_url')}}">
                 <i class="fab fa-instagram"></i>
             </a>
-            <a class="pl-6" href="#">
+            <a class="pl-6" href="{{getSettings('twitter_url')}}">
                 <i class="fab fa-twitter"></i>
             </a>
-            <a class="pl-6" href="#">
+            <a class="pl-6" href="{{getSettings('linkedin_url')}}">
                 <i class="fab fa-linkedin"></i>
             </a>
         </div>

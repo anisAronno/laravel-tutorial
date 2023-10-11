@@ -90,12 +90,13 @@
     </div>
 </div>
 
-<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col text-white">
      <div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
       <div class="flex h-16 shrink-0 items-center">
         <a href="{{route('admin.dashboard')}}" class=" group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold {{ Route::currentRouteName() == 'admin.dashboard' ? "bg-gray-800 text-white" : "text-gray-400 hover:text-white hover:bg-gray-800" }}" >
-            <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company">
-        </a>      </div>
+            <img class="h-8 w-auto" src="{{ Storage::disk('public')->url(getSettings('logo')) }}" alt="Your Company">
+        </a>      
+    </div>
       <nav class="flex flex-1 flex-col">
         <ul role="list" class="flex flex-1 flex-col gap-y-7">
           <li>
