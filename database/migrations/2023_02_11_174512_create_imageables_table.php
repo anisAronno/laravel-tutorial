@@ -1,6 +1,6 @@
 <?php
 
-use AnisAronno\MediaHelper\Models\Image;
+use AnisAronno\MediaGallery\Models\Image;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
