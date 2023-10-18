@@ -22,7 +22,7 @@ Route::prefix('admin')->controller(UserController::class)->middleware('auth')->n
     Route::post('/user', 'store')->name('user.store');
     Route::get('/user/{user}', 'show')->where('id', '[0-9]+')->name('user.show');
     Route::delete('/user/delete/{user}', [UserController::class, 'destroy'])->name('user.delete');
-    
+
     Route::post('/user/image/{user}', [UserController::class, 'avatarChange'])->name('user.avatar.change');
 
     Route::get('/user/{user}/edit', [UserController::class, 'edit'])->name('user.edit');
@@ -50,7 +50,14 @@ Route::prefix('admin')->controller(UserController::class)->middleware('auth')->n
 
 //Auth Route
 Route::get('login', [AuthController::class, 'login'])->name('login')->middleware('guest');
+Route::get('password-recover', [AuthController::class, 'passwordRecover'])->name('password.recover')->middleware('guest');
+Route::post('password-recover', [AuthController::class, 'passwordRecoverProcess'])->name('password.recover.store')->middleware('guest');
 Route::post('login', [AuthController::class, 'loginProcess'])->name('loginProcess');
+
+Route::get('/reset-password/{token}', [AuthController::class,'resetPassword'])->middleware('guest')->name('password.reset');
+
+Route::post('/reset-password', [AuthController::class, 'passwordUpdate'])->middleware('guest')->name('password.update');
+
 
 //frontend route
 Route::get('/', [HomeController::class, 'index'])->name('home');
