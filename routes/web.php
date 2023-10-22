@@ -12,6 +12,8 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogController as FrontendBlogController;
 use App\Http\Controllers\ContactController as FrontendContactController;
 use App\Http\Controllers\HomeController;
+use App\Mail\TestMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->controller(UserController::class)->middleware('auth')->name('admin.')->group(function () {
@@ -66,3 +68,11 @@ Route::get('/blog', [FrontendBlogController::class, 'index'])->name('blog');
 Route::get('/blog/{blog:slug}', [FrontendBlogController::class, 'show'])->name('blog.show');
 Route::get('/contact', [FrontendContactController::class, 'index'])->name('contact');
 Route::post('/contact', [FrontendContactController::class, 'store'])->name('contact.store');
+
+
+Route::get('mail', function () {
+
+    Mail::to(auth()->user())->send(new TestMail(auth()->user()));
+
+    return "Mail Send";
+})->middleware(['auth']);
