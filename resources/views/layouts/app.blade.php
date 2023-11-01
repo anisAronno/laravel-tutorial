@@ -34,7 +34,12 @@
                 <a href="#" class="uppercase px-3">Terms & Conditions</a>
                 <a href="#" class="uppercase px-3">Contact Us</a>
             </div>
-            <div class="uppercase pb-6">{{getSettings('copyright')}}</div>
+            
+            @if (hasSettings('copyright'))
+                <p>{{ getSettings('copyright') }}</p>
+            @else
+                <div class="uppercase pb-6">All Right Reserved {{date('Y', time())}}.</div>
+            @endif
         </div>
     </footer>
 

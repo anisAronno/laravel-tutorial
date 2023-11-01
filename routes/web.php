@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\BlogController as FrontendBlogController;
 use App\Http\Controllers\ContactController as FrontendContactController;
 use App\Http\Controllers\HomeController;
+use App\Jobs\TestJob;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -76,3 +77,17 @@ Route::get('mail', function () {
 
     return "Mail Send";
 })->middleware(['auth']);
+
+
+Route::get('job', function () {
+    $order = [
+        'amount' => 30,
+        'product' => 'I Phone 15 pro',
+        'receiver' => 'Kader',
+        'address' => 'Khulna',
+        'email' => 'anis@gmail.com'
+    ];
+
+    TestJob::dispatch($order);
+
+})->name('job');
