@@ -14,6 +14,7 @@ use App\Http\Controllers\ContactController as FrontendContactController;
 use App\Http\Controllers\HomeController;
 use App\Jobs\TestJob;
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -91,3 +92,16 @@ Route::get('job', function () {
     TestJob::dispatch($order);
 
 })->name('job');
+
+
+
+Route::get('cache', function () {
+
+    Cache::put('test', 'test data store', 10);
+
+    echo  Cache::get('test');
+
+    // Cache::forget('test');
+
+    // echo "Cache Saved";
+});

@@ -4,15 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::with('user')->orderByDesc('id')->simplePaginate(10);
+        $page = 1;
+
+        if($request->page) {
+            $page = $request->page;
+        }
+
+        $key = 'blogs_'.$page;
+        $tagKey = 'blog';
+
+        $blogs = Cache::tags([$tagKey])->remember($key, 600, function () {
+            return Blog::with('user')->orderByDesc('id')->simplePaginate(10);
+        });
+
+
         return view('home', compact('blogs'));
     }
 

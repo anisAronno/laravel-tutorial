@@ -203,12 +203,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/anisAronno/laravel-settings.git",
-                "reference": "6e4235ad57b603bf76eb3ba090f67f5156b50503"
+                "reference": "f27a498e535f7a3feda38b0450333a23dc73a856"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/anisAronno/laravel-settings/zipball/6e4235ad57b603bf76eb3ba090f67f5156b50503",
-                "reference": "6e4235ad57b603bf76eb3ba090f67f5156b50503",
+                "url": "https://api.github.com/repos/anisAronno/laravel-settings/zipball/f27a498e535f7a3feda38b0450333a23dc73a856",
+                "reference": "f27a498e535f7a3feda38b0450333a23dc73a856",
                 "shasum": ""
             },
             "require": {
@@ -261,7 +261,7 @@
                 "issues": "https://github.com/anisAronno/laravel-settings/issues",
                 "source": "https://github.com/anisAronno/laravel-settings/tree/v0.1.6"
             },
-            "time": "2023-11-02T05:47:22+00:00"
+            "time": "2023-11-02T06:00:35+00:00"
         },
         {
             "name": "brick/math",

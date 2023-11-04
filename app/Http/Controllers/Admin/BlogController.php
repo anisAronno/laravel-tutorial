@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -13,9 +14,20 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogs = Blog::orderByDesc('id')->paginate(10);
+        $page = 1;
+
+        if($request->page) {
+            $page = $request->page;
+        }
+
+        $key = 'blogs_'.$page;
+        $tagKey = 'blog_admin';
+
+        $blogs = Cache::tags([$tagKey])->remember($key, 60, function () {
+            return Blog::orderByDesc('id')->paginate(10);
+        });
 
         return view('dashboard.blog.index', ['blogs' => $blogs]);
     }
@@ -95,6 +107,7 @@ class BlogController extends Controller
 
         if($blog->delete()) {
             Storage::disk('public')->delete($filename);
+
             return redirect()->to(route('admin.blog.index'));
         } else {
             return redirect()->back();
