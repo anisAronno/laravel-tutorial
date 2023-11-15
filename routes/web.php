@@ -14,9 +14,12 @@ use App\Http\Controllers\ContactController as FrontendContactController;
 use App\Http\Controllers\HomeController;
 use App\Jobs\TestJob;
 use App\Mail\TestMail;
+use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Http\Client\PendingRequest;
 
 Route::prefix('admin')->controller(UserController::class)->middleware('auth')->name('admin.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
@@ -104,4 +107,26 @@ Route::get('cache', function () {
     // Cache::forget('test');
 
     // echo "Cache Saved";
+});
+
+
+Route::get('http', function () {
+
+    $http = new PendingRequest();
+    $http->baseUrl('https://jsonplaceholder.typicode.com/')
+        ->acceptJson()
+        ->retry(3, 100)
+        ->contentType('application/json');
+
+    try {
+        $response = $http->get('todos');
+
+        if($response->successful()) {
+            return $response->json();
+        } else {
+            echo $response->body();
+        }
+    } catch (HttpClientException $th) {
+        echo $th->getMessage();
+    }
 });

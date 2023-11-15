@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::get('http', function () {
+    $client = new \GuzzleHttp\Client();
+    $res = $client->request('GET', 'http://twitter.test/api/tweet');
+    response()->json($res->getBody());
 });

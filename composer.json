@@ -12,6 +12,7 @@
     "anisaronno/laravel-media-gallery": "0.1.4",
     "anisaronno/laravel-settings": "0.1.6",
     "guzzlehttp/guzzle": "^7.2",
+    "itsgoingd/clockwork": "^5.1",
     "laravel/framework": "^10.10",
     "laravel/sanctum": "^3.2",
     "laravel/tinker": "^2.8",
