@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\UserRegistrationEvent;
 use App\Http\Controllers\AboutController as FrontendAboutController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\BlogController;
@@ -14,6 +15,8 @@ use App\Http\Controllers\ContactController as FrontendContactController;
 use App\Http\Controllers\HomeController;
 use App\Jobs\TestJob;
 use App\Mail\TestMail;
+use App\Models\User;
+use App\Notifications\UserRegistrationNotification;
 use Illuminate\Http\Client\HttpClientException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
@@ -129,4 +132,11 @@ Route::get('http', function () {
     } catch (HttpClientException $th) {
         echo $th->getMessage();
     }
+});
+
+
+Route::get('event', function () {
+
+    $user = User::find(1);
+    UserRegistrationEvent::dispatch($user);
 });
