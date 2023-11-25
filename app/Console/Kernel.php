@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         Artisan::call('queue:work');
 
         $schedule->command('lima')->everyOddHour();
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
     }
 
     /**
