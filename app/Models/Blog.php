@@ -22,17 +22,6 @@ class Blog extends Model
         parent::boot();
     }
 
-    public function getImageAttribute($value)
-    {
-        $storage = Storage::disk('public');
-
-        if(!empty($value) && $storage->exists($value)) {
-            return Storage::disk('public')->url($value);
-        }
-
-        return $value;
-    }
-
     public function getNextAttribute()
     {
 
